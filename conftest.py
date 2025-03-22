@@ -1,5 +1,4 @@
 import pytest
-from pycparser.ply.yacc import token
 
 from data import generate_payload
 from methods.creating_user_methods import NewUserMethods
@@ -11,6 +10,13 @@ def user():
     payload = generate_payload()
     resp = NewUserMethods.create_user(payload)
     yield payload
+    NewUserMethods.delete_user(resp.json()['accessToken'])
+
+@pytest.fixture()
+def new_user():
+    payload = generate_payload()
+    resp = NewUserMethods.create_user(payload)
+    yield resp
     NewUserMethods.delete_user(resp.json()['accessToken'])
 
 @pytest.fixture()

@@ -3,8 +3,8 @@ from methods.creating_user_methods import NewUserMethods
 
 
 class TestCreatingUser:
-    def test_creating_user(self):
-        new_user = NewUserMethods.create_user(generate_payload())
+    def test_creating_user(self, new_user):
+        #new_user = NewUserMethods.create_user(generate_payload())
         assert new_user.status_code == 200 and new_user.json()['success'] == True
 
     def test_creating_the_same_user(self):
